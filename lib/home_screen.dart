@@ -1,4 +1,6 @@
+import 'package:androidchallenge/model/colours_model.dart';
 import 'package:androidchallenge/providers/results.dart';
+import 'package:androidchallenge/widgets/colour_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,12 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: GridView.count(
                   crossAxisCount: 2,
-                  children: <Widget>[
-                    FlutterLogo(),
-                    FlutterLogo(),
-                    FlutterLogo(),
-                    FlutterLogo(),
-                  ],
+                  children: _getColourList(colours.items),
                 ),
               )
             ],
@@ -68,5 +65,21 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
+  }
+
+  _getColourList(List<Colour> list) {
+    List<ColourBox> colourBoxes = [];
+    for (Colour box in list) {
+      String hex = "0xff" + box.hex.toString();
+      colourBoxes.add(
+        ColourBox(
+          colourName: box.title.toString(),
+          hexName: box.hex.toString(),
+          colour: Color(int.parse(hex)),
+        ),
+      );
+    }
+
+    return colourBoxes;
   }
 }

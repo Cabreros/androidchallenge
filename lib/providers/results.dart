@@ -12,6 +12,7 @@ class ResultModel extends ChangeNotifier {
     loading = true;
     _items = await DataService().getColours(keyword);
     loading = false;
+    notifyListeners();
   }
 
   // void addItem(String item) {
